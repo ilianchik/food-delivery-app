@@ -54,10 +54,10 @@ export default function MenuItem(menuItem) {
         >
           <div
             onClick={(ev) => ev.stopPropagation()}
-            className="my-8 bg-white p-2 rounded-lg max-w-md"
+            className="my-8 bg-white p-2 rounded-lg max-w-md "
           >
             <div
-              className="overflow-y-scroll p-2"
+              className="overflow-y-scroll p-2 custom-scrollbar"
               style={{ maxHeight: "calc(100vh - 100px)" }}
             >
               <Image
@@ -112,11 +112,13 @@ export default function MenuItem(menuItem) {
                 </div>
               )}
               <div
-                className="primary sticky bottom-2"
+                className=" sticky bottom-2  border border-primary rounded-xl bg-white"
                 onClick={handleAddToCartButtonClick}
               >
                 <FlyingButton targetTop={"5%"} targetLeft={"95%"} src={image}>
-                  Add to cart ${selectedPrice}
+                  <span className="text-primary w-full">
+                    Add to cart ${selectedPrice}
+                  </span>
                 </FlyingButton>
               </div>
               <button className="mt-2" onClick={() => setShowPopup(false)}>

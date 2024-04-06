@@ -20,7 +20,7 @@ export default function RegisterPage() {
     registerUser({ email, password });
   }
   return (
-    <section className="mt-8">
+    <section className="my-8 ">
       <h1 className="text-center text-primary text-4xl mb-4">Register</h1>
       {isRegistrationSuccess && (
         <div className="my-4 text-center">
@@ -63,6 +63,7 @@ export default function RegisterPage() {
         <button
           onClick={() => signIn("google", { callbackUrl: "/" })}
           className="flex gap-4 justify-center"
+          type="button"
         >
           <Image src={"/google.png"} alt={""} width={24} height={24} />
           Login with google

@@ -3,11 +3,15 @@
 import { useGetCategories, useGetMenuItems } from "@/libs/Tanstack/queries";
 import Image from "next/image";
 import SectionHeaders from "./SectionHeaders";
+import Spinner from "@/components/layout/Spinner";
 
 function ExploreMenu() {
   const { data: categories, isPending: categoriesLoading } = useGetCategories();
   const { data: menuItems, isPending: menuItemsLoading } = useGetMenuItems();
-  if (categoriesLoading || menuItemsLoading) return "";
+  if (categoriesLoading || menuItemsLoading) {
+    return <Spinner />;
+  }
+
   return (
     <section className="mb-10">
       <SectionHeaders mainHeader={"Explore Our Menu"} />

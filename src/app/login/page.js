@@ -1,28 +1,49 @@
 "use client";
-import {
-  useUserLoginWithCredentials,
-  useUserLoginWithGoogle,
-} from "@/libs/Tanstack/queries";
+import { useUserLoginWithGoogle } from "@/libs/Tanstack/queries";
+import { signIn } from "next-auth/react";
 
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {
-    mutate: loginWithCredentials,
-    isPending: isloginWithCredentialsLoading,
-  } = useUserLoginWithCredentials();
+  const [isloginWithCredentialsLoading, setIsloginWithCredentialsLoading] =
+    useState(false);
   const { mutate: loginWithGoogle } = useUserLoginWithGoogle();
-
+  const [loginError, setLoginError] = useState(false);
+  const router = useRouter();
+  const queryClient = useQueryClient();
   async function handleFormSubmit(ev) {
+    setIsloginWithCredentialsLoading(true);
     ev.preventDefault();
-    loginWithCredentials({ email, password });
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: "/",
+    }).then((res) => {
+      setLoginError(!res.ok);
+      if (res.ok === true) {
+        router.push("/");
+        queryClient.invalidateQueries(["GET_USER_INFO"]);
+      }
+    });
+    setIsloginWithCredentialsLoading(false);
   }
+
   return (
     <section className="mt-8">
       <h1 className="text-center text-primary text-4xl mb-4">Login</h1>
+      {loginError && (
+        <div className="my-4 text-center">
+          An error has occurred.
+          <br />
+          Please try again later
+        </div>
+      )}
       <form className="max-w-xs mx-auto" onSubmit={handleFormSubmit}>
         <input
           type="email"

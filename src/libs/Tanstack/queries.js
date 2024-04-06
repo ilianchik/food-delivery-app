@@ -9,16 +9,6 @@ export const useCreateUserAccount = () => {
   });
 };
 
-export const useUserLoginWithCredentials = () => {
-  return useMutation({
-    mutationFn: async ({ email, password }) =>
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/",
-      }),
-  });
-};
 export const useUserLoginWithGoogle = () => {
   return useMutation({
     mutationFn: async () => await signIn("google", { callbackUrl: "/" }),

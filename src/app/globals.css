@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 section.hero {
-  @apply block md:grid;
-  grid-template-columns: 0.4fr 0.6fr;
-}
-section.herotest {
   background-image: url("/hero-background.png");
   background-position: center;
   background-size: cover;
@@ -55,4 +51,23 @@ div.tabs > *.active {
 
 .flying-button-parent button {
   @apply border-primary bg-primary text-white rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #f46134;
+  border-radius: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #dc572f;
 }

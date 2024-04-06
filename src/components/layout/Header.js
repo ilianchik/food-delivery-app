@@ -5,7 +5,9 @@ import ShoppingCart from "@/components/icons/ShoppingCart";
 import { useGetUserInfo } from "@/libs/Tanstack/queries";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext, useState } from "react";
+import Loader from "./Loader";
 
 function AuthLinks({ status, userName }) {
   if (status === "authenticated") {
@@ -36,6 +38,9 @@ function AuthLinks({ status, userName }) {
       </>
     );
   }
+  if (status === "loading") {
+    return <Loader />;
+  }
 }
 
 export default function Header() {
@@ -45,13 +50,15 @@ export default function Header() {
   let userName = userData?.name || userData?.email;
   const { cartProducts } = useContext(CartContext);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const path = usePathname();
+  console.log(status);
 
   if (userName && userName.includes(" ")) {
     userName = userName.split(" ")[0];
   }
   return (
     <header>
-      <div className="flex items-center md:hidden justify-between">
+      {/* <div className="flex items-center md:hidden justify-between">
         <Link className="text-primary font-semibold text-2xl" href={"/"}>
           ST PIZZA
         </Link>
@@ -83,16 +90,44 @@ export default function Header() {
           <Link href={"/#contact"}>Contact</Link>
           <AuthLinks status={status} userName={userName} />
         </div>
-      )}
+      )} */}
       <div className="hidden md:flex items-center justify-between">
         <Link className="text-primary font-semibold text-4xl" href={"/"}>
           YumYard
         </Link>
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
-          <Link href={"/"}>Home</Link>
-          <Link href={"/menu"}>Menu</Link>
-          <Link href={"/#about"}>About</Link>
-          <Link href={"/#contact"}>Contact</Link>
+          <Link
+            className={
+              path !== "/menu"
+                ? "border-b-[3px] border-primary"
+                : "hover:border-b-[3px] hover:border-primary"
+            }
+            href={"/"}
+          >
+            Home
+          </Link>
+          <Link
+            className={
+              path === "/menu"
+                ? "border-b-[3px] border-primary"
+                : "hover:border-b-[3px] hover:border-primary"
+            }
+            href={"/menu"}
+          >
+            Menu
+          </Link>
+          <Link
+            className="hover:border-b-[3px] hover:border-primary"
+            href={"/#about"}
+          >
+            About
+          </Link>
+          <Link
+            className="hover:border-b-[3px] hover:border-primary"
+            href={"/#contact"}
+          >
+            Contact
+          </Link>
         </nav>
         <nav className="flex items-center gap-4 text-gray-500 font-semibold">
           <AuthLinks status={status} userName={userName} />
