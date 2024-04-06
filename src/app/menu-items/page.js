@@ -4,7 +4,6 @@ import UserTabs from "@/components/layout/UserTabs";
 import { useGetMenuItems, useGetUserInfo } from "@/libs/Tanstack/queries";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function MenuItemsPage() {
   const { data, isPending: loading } = useGetUserInfo();

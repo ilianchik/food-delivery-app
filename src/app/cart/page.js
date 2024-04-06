@@ -1,11 +1,10 @@
 "use client";
 import { CartContext, cartProductPrice } from "@/components/AppContext";
-import Trash from "@/components/icons/Trash";
 import AddressInputs from "@/components/layout/AddressInputs";
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import CartProduct from "@/components/menu/CartProduct";
 import { useProfile } from "@/components/UseProfile";
-import Image from "next/image";
+import { useCheckout } from "@/libs/Tanstack/queries";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,6 +12,7 @@ export default function CartPage() {
   const { cartProducts, removeCartProduct } = useContext(CartContext);
   const [address, setAddress] = useState({});
   const { data: profileData } = useProfile();
+  const { mutateAsync: checkout } = useCheckout();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -45,31 +45,17 @@ export default function CartPage() {
   }
   async function proceedToCheckout(ev) {
     ev.preventDefault();
-    // address and shopping cart products
 
-    const promise = new Promise((resolve, reject) => {
-      fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          address,
-          cartProducts,
-        }),
-      }).then(async (response) => {
-        if (response.ok) {
-          resolve();
-          window.location = await response.json();
-        } else {
-          reject();
-        }
-      });
-    });
-
-    await toast.promise(promise, {
-      loading: "Preparing your order...",
-      success: "Redirecting to payment...",
-      error: "Something went wrong... Please try again later",
-    });
+    toast.promise(
+      checkout({ address, cartProducts }).then(
+        (r) => (window.location = r.data)
+      ),
+      {
+        loading: "Preparing your order...",
+        success: "Redirecting to payment...",
+        error: "Something went wrong... Please try again later",
+      }
+    );
   }
 
   if (cartProducts?.length === 0) {

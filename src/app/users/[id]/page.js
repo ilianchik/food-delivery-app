@@ -1,51 +1,52 @@
-'use client';
+"use client";
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
-import {useProfile} from "@/components/UseProfile";
-import {useParams} from "next/navigation";
-import {useEffect, useState} from "react";
+import {
+  useGetUserInfo,
+  useGetUserInfoById,
+  useUpdateUserInfoById,
+} from "@/libs/Tanstack/queries";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function EditUserPage() {
-  const {loading, data} = useProfile();
-  const [user, setUser] = useState(null);
-  const {id} = useParams();
+  const { data, isPending: loading } = useGetUserInfo();
 
+  const { id } = useParams();
+  const { data: user, isPending: userLoading } = useGetUserInfoById(id);
+  const {
+    mutateAsync: updateUserInfoById,
+    isSuccess: updateUserInfoByIdSuccess,
+  } = useUpdateUserInfoById();
+  const queryClient = useQueryClient();
   useEffect(() => {
-    fetch('/api/profile?_id='+id).then(res => {
-      res.json().then(user => {
-        setUser(user);
-      });
-    })
-  }, []);
+    if (updateUserInfoByIdSuccess === true) {
+      queryClient.invalidateQueries([
+        "GET_USER_INFO",
+        "GET_USER_INFO_BY_ID",
+        "GET_USERS",
+      ]);
+    }
+  }, [updateUserInfoByIdSuccess, queryClient]);
 
   async function handleSaveButtonClick(ev, data) {
     ev.preventDefault();
-    const promise = new Promise(async (resolve, reject) => {
-      const res = await fetch('/api/profile', {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...data,_id:id}),
-      });
-      if (res.ok)
-        resolve();
-      else
-        reject();
-    });
 
-    await toast.promise(promise, {
-      loading: 'Saving user...',
-      success: 'User saved',
-      error: 'An error has occurred while saving the user',
+    toast.promise(updateUserInfoById({ data, id }), {
+      loading: "Saving...",
+      success: "Profile saved!",
+      error: "Error",
     });
   }
 
-  if (loading) {
-    return 'Loading user profile...';
+  if (loading || userLoading) {
+    return "Loading user profile...";
   }
 
   if (!data.admin) {
-    return 'Not an admin';
+    return "Not an admin";
   }
 
   return (

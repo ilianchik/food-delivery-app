@@ -2,6 +2,7 @@ import Plus from "@/components/icons/Plus";
 import Trash from "@/components/icons/Trash";
 import EditableImage from "@/components/layout/EditableImage";
 import MenuItemPriceProps from "@/components/layout/MenuItemPriceProps";
+import { useGetCategories } from "@/libs/Tanstack/queries";
 import { useEffect, useState } from "react";
 
 export default function MenuItemForm({ onSubmit, menuItem }) {
@@ -11,19 +12,15 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
   const [basePrice, setBasePrice] = useState(menuItem?.basePrice || "");
   const [sizes, setSizes] = useState(menuItem?.sizes || []);
   const [category, setCategory] = useState(menuItem?.category || "");
-  const [categories, setCategories] = useState([]);
+
   const [extraIngredientPrices, setExtraIngredientPrices] = useState(
     menuItem?.extraIngredientPrices || []
   );
+  const { data: categories } = useGetCategories();
   console.log(category);
   useEffect(() => {
-    fetch("/api/categories").then((res) => {
-      res.json().then((categories) => {
-        setCategories(categories);
-        categories && !category && setCategory(categories[0]._id);
-      });
-    });
-  }, [category]);
+    categories && !category && setCategory(categories[0]._id);
+  }, [categories, category]);
 
   return (
     <form

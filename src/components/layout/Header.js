@@ -16,7 +16,7 @@ function AuthLinks({ status, userName }) {
         </Link>
         <button
           onClick={() => signOut()}
-          className="bg-primary rounded-full text-white px-8 py-2"
+          className="border-primary text-primary rounded-full  px-8 py-2"
         >
           Logout
         </button>
@@ -29,7 +29,7 @@ function AuthLinks({ status, userName }) {
         <Link href={"/login"}>Login</Link>
         <Link
           href={"/register"}
-          className="bg-primary rounded-full text-white px-8 py-2"
+          className="border-primary border text-primary  rounded-full  px-8 py-2"
         >
           Register
         </Link>
@@ -85,10 +85,10 @@ export default function Header() {
         </div>
       )}
       <div className="hidden md:flex items-center justify-between">
+        <Link className="text-primary font-semibold text-4xl" href={"/"}>
+          YumYard
+        </Link>
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
-          <Link className="text-primary font-semibold text-2xl" href={"/"}>
-            ST PIZZA
-          </Link>
           <Link href={"/"}>Home</Link>
           <Link href={"/menu"}>Menu</Link>
           <Link href={"/#about"}>About</Link>

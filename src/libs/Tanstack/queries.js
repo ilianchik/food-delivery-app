@@ -143,3 +143,79 @@ export const useDeleteMenuItem = () => {
     },
   });
 };
+
+export const useCreateMenuItem = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => await axios.post("/api/menu-items", data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["GET_MENU_ITEMS", "GET_MENU_ITEM_BY_ID"],
+      });
+    },
+  });
+};
+
+export const useGetUsers = () => {
+  return useQuery({
+    queryKey: ["GET_USERS"],
+    queryFn: async () => {
+      const response = await axios("/api/users");
+      return response.data;
+    },
+  });
+};
+
+export const useGetUserInfoById = (id) => {
+  return useQuery({
+    queryKey: ["GET_USER_INFO_BY_ID", id],
+    queryFn: async () => {
+      const response = await axios("/api/profile?_id=" + id);
+      return response.data;
+    },
+  });
+};
+
+export const useUpdateUserInfoById = () => {
+  return useMutation({
+    mutationFn: async ({ data, id }) =>
+      await axios.put("/api/profile", { ...data, _id: id }),
+  });
+};
+
+export const useGetOrders = () => {
+  return useQuery({
+    queryKey: ["GET_ORDERS"],
+    queryFn: async () => {
+      const response = await axios("/api/orders");
+      return response.data;
+    },
+  });
+};
+
+export const useGetOrderById = (id) => {
+  return useQuery({
+    queryKey: ["GET_ORDER_BY_ID", id],
+    queryFn: async () => {
+      const response = await axios("/api/orders?_id=" + id);
+      return response.data;
+    },
+  });
+};
+
+export const useGetBestSellers = () => {
+  return useQuery({
+    queryKey: ["GET_BEST_SELLERS"],
+    queryFn: async () => {
+      const response = await axios("/api/menu-items");
+      return response.data.slice(-8);
+    },
+  });
+};
+
+export const useCheckout = () => {
+  return useMutation({
+    mutationFn: async ({ address, cartProducts }) =>
+      await axios.post("/api/checkout", { address, cartProducts }),
+  });
+};
