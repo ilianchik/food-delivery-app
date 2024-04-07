@@ -1,5 +1,6 @@
 "use client";
 import Right from "@/components/icons/Right";
+import Spinner from "@/components/layout/Spinner";
 import UserTabs from "@/components/layout/UserTabs";
 import { useGetMenuItems, useGetUserInfo } from "@/libs/Tanstack/queries";
 import Image from "next/image";
@@ -7,10 +8,14 @@ import Link from "next/link";
 
 export default function MenuItemsPage() {
   const { data, isPending: loading } = useGetUserInfo();
-  const { data: menuItems } = useGetMenuItems();
+  const { data: menuItems, isPending: menuItemsLoading } = useGetMenuItems();
 
-  if (loading) {
-    return "Loading user info...";
+  if (loading || menuItemsLoading) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!data.admin) {

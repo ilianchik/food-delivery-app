@@ -40,6 +40,7 @@ export default function CartPage() {
   for (const p of cartProducts) {
     subtotal += cartProductPrice(p);
   }
+
   function handleAddressChange(propName, value) {
     setAddress((prevAddress) => ({ ...prevAddress, [propName]: value }));
   }
@@ -68,11 +69,11 @@ export default function CartPage() {
   }
   console.log(cartProducts);
   return (
-    <section className="mt-8">
+    <section className="mt-3 md:mt-8">
       <div className="text-center">
         <SectionHeaders mainHeader="Cart" />
       </div>
-      <div className="mt-8 grid gap-8 grid-cols-2">
+      <div className="mt-8 md:grid gap-8 flex flex-col-reverse  md:grid-cols-2">
         <div>
           {cartProducts?.length === 0 && (
             <div>No products in your shopping cart</div>
@@ -86,7 +87,7 @@ export default function CartPage() {
                 index={index}
               />
             ))}
-          <div className="py-2 pr-16 flex justify-end items-center">
+          <div className="py-2 pr-16 flex justify-end items-center ">
             <div className="text-gray-500">
               Subtotal:
               <br />
@@ -98,18 +99,18 @@ export default function CartPage() {
               ${subtotal}
               <br />
               $5
-              <br />${subtotal + 5}
+              <br />${(subtotal + 5).toFixed(2)}
             </div>
           </div>
         </div>
-        <div className="bg-gray-100 p-4 rounded-lg">
+        <div className="bg-gray-100 p-4 rounded-lg ">
           <h2>Checkout</h2>
           <form onSubmit={proceedToCheckout}>
             <AddressInputs
               addressProps={address}
               setAddressProp={handleAddressChange}
             />
-            <button type="submit">Pay ${subtotal + 5}</button>
+            <button type="submit">Pay ${(subtotal + 5).toFixed(2)}</button>
           </form>
         </div>
       </div>

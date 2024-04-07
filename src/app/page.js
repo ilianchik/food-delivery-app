@@ -24,21 +24,15 @@ export default function Home() {
       <HomeMenu test={test} />
       <section className=" my-10 text-start" id="about">
         <SectionHeaders mainHeader={"About us"} />
-        <div className="grid grid-cols-[0.4fr_0.6fr] items-center gap-7 mb-[50px]">
-          <div className="text-gray-500 mt-4 flex flex-col gap-7">
+        <div className="flex flex-col-reverse md:grid md:grid-cols-[0.4fr_0.6fr] items-center gap-7 mb-[50px]">
+          <div className="text-gray-500 mt-4 flex flex-col gap-7 text-sm md:text-base">
             <p>
               Welcome to YumYard, your ultimate destination for culinary
               convenience and gastronomic delight! At YumYard, we&#39;ve crafted
               a seamless food ordering experience designed to tantalize your
               taste buds and satisfy your cravings with just a few taps.
             </p>
-            {/* <p>
-              Whether you&#39;re craving savory delights, indulgent treats, or
-              healthy alternatives, YumYard brings a diverse array of cuisines
-              right to your fingertips. From sizzling pizzas to fragrant Thai
-              curries, hearty burgers to fresh salads, our extensive menu offers
-              something for every palate and preference.
-            </p> */}
+
             <p>
               Join our vibrant community of food enthusiasts and let YumYard
               elevate your dining experience. Whether it&#39;s a quick bite on
@@ -66,21 +60,21 @@ export default function Home() {
         </div>
         <div className="w-full h-[1px] bg-gray-300"></div>
       </section>
-      <section className="text-start my-8" id="contact">
+      <section className="text-start my-4 md:my-8" id="contact">
         <SectionHeaders mainHeader={"Contact us"} />
-        <div className="mt-8 flex justify-center gap-20">
+        <div className="mt-8 flex md:flex-row flex-col justify-center items-center gap-10 md:gap-20">
           <a
-            className="text-2xl underline text-primary flex gap-3 items-center"
+            className="md:text-2xl underline text-primary flex gap-3 items-center"
             href="tel:+46738123123"
           >
-            <Phone className="w-8 h-8" />
+            <Phone className="md:w-8 md:h-8 w-5 h-5" />
             +46 738 123 123
           </a>
           <a
-            className="text-2xl underline text-primary flex gap-2 items-center"
+            className="md:text-2xl underline text-primary flex gap-2 items-center"
             href="mailto:yumyard@gmail.com"
           >
-            <Email className="w-8 h-8" />
+            <Email className="md:w-8 md:h-8 w-5 h-5" />
             yumyard@gmail.com
           </a>
         </div>

@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/layout/Spinner";
 import UserTabs from "@/components/layout/UserTabs";
 
 import { useGetUserInfo, useGetUsers } from "@/libs/Tanstack/queries";
@@ -9,7 +10,11 @@ export default function UsersPage() {
   const { data: users, isPending: usersLoading } = useGetUsers();
 
   if (loading || usersLoading) {
-    return "Loading user info...";
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!data.admin) {

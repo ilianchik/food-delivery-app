@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/layout/Spinner";
 import UserTabs from "@/components/layout/UserTabs";
 import { dbTimeForHuman } from "@/libs/datetime";
 import { useGetOrders, useGetUserInfo } from "@/libs/Tanstack/queries";
@@ -9,13 +10,17 @@ export default function OrdersPage() {
   const { data: profile, isPending: loading } = useGetUserInfo();
   const { data: orders, isPending: loadingOrders } = useGetOrders();
 
-  if (loading) return "Loading...";
+  if (loading || loadingOrders)
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
       <UserTabs isAdmin={profile.admin} />
       <div className="mt-8">
-        {loadingOrders && <div>Loading orders...</div>}
         {orders?.length > 0 &&
           orders.map((order) => (
             <div

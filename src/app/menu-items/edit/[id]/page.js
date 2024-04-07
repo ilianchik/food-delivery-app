@@ -3,6 +3,7 @@ import DeleteButton from "@/components/DeleteButton";
 import Left from "@/components/icons/Left";
 import EditableImage from "@/components/layout/EditableImage";
 import MenuItemForm from "@/components/layout/MenuItemForm";
+import Spinner from "@/components/layout/Spinner";
 import UserTabs from "@/components/layout/UserTabs";
 import {
   useDeleteMenuItem,
@@ -53,7 +54,11 @@ export default function EditMenuItemPage() {
   }
 
   if (loading || menuItemLoading) {
-    return "Loading...";
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!data?.admin) {

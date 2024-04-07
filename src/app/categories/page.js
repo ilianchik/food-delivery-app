@@ -10,13 +10,14 @@ import {
   useGetUserInfo,
   useUpdateCategory,
 } from "@/libs/Tanstack/queries";
+import Spinner from "@/components/layout/Spinner";
 
 export default function CategoriesPage() {
   const [categoryName, setCategoryName] = useState("");
 
   const { data: profileData, isPending: profileLoading } = useGetUserInfo();
   const [editedCategory, setEditedCategory] = useState(null);
-  const { data: categories } = useGetCategories();
+  const { data: categories, isPending: categoriesLoading } = useGetCategories();
   const { mutateAsync: createCategory } = useCreateCategory();
   const { mutateAsync: updateCategory } = useUpdateCategory();
   const { mutateAsync: deleteCategory } = useDeleteCategory();
@@ -51,8 +52,12 @@ export default function CategoriesPage() {
     });
   }
 
-  if (profileLoading) {
-    return "Loading user info...";
+  if (profileLoading || categoriesLoading) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!profileData.admin) {

@@ -198,7 +198,7 @@ export const useGetBestSellers = () => {
     queryKey: ["GET_BEST_SELLERS"],
     queryFn: async () => {
       const response = await axios("/api/menu-items");
-      return response.data.slice(-8);
+      return response.data.slice(0, 8);
     },
   });
 };

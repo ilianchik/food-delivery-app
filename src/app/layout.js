@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
               <Toaster />
               <Header />
               <div className="">{children}</div>
-              <footer className="border-t p-8 text-center text-gray-500 mt-16">
+              <footer className="border-t p-8 text-sm md:text-base text-center text-gray-500 mt-8 md:mt-16">
                 &copy; 2024 All rights reserved
               </footer>
             </AppProvider>

@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useGetUserInfo, useCreateMenuItem } from "@/libs/Tanstack/queries";
 import { useQueryClient } from "@tanstack/react-query";
+import Spinner from "@/components/layout/Spinner";
 
 export default function NewMenuItemPage() {
-  const [redirectToItems, setRedirectToItems] = useState(false);
   const { data, isPending: loading } = useGetUserInfo();
   const { mutateAsync: createMenuItem, isSuccess: createMenuItemSuccess } =
     useCreateMenuItem();
@@ -30,12 +30,12 @@ export default function NewMenuItemPage() {
     });
   }
 
-  if (redirectToItems) {
-    return redirect("/menu-items");
-  }
-
   if (loading) {
-    return "Loading user info...";
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!data.admin) {

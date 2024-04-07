@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/layout/Spinner";
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
 import {
@@ -42,7 +43,11 @@ export default function EditUserPage() {
   }
 
   if (loading || userLoading) {
-    return "Loading user profile...";
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!data.admin) {

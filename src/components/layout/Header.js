@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import Loader from "./Loader";
 
 function AuthLinks({ status, userName }) {
+  const { clearCart } = useContext(CartContext);
   if (status === "authenticated") {
     return (
       <>
@@ -17,7 +18,10 @@ function AuthLinks({ status, userName }) {
           Hello, {userName}
         </Link>
         <button
-          onClick={() => signOut()}
+          onClick={() => {
+            signOut();
+            clearCart();
+          }}
           className="border-primary text-primary rounded-full  px-8 py-2"
         >
           Logout
@@ -58,9 +62,9 @@ export default function Header() {
   }
   return (
     <header>
-      {/* <div className="flex items-center md:hidden justify-between">
+      <div className="flex items-center md:hidden justify-between mb-3">
         <Link className="text-primary font-semibold text-2xl" href={"/"}>
-          ST PIZZA
+          YumYard
         </Link>
         <div className="flex gap-8 items-center">
           <Link href={"/cart"} className="relative">
@@ -90,7 +94,7 @@ export default function Header() {
           <Link href={"/#contact"}>Contact</Link>
           <AuthLinks status={status} userName={userName} />
         </div>
-      )} */}
+      )}
       <div className="hidden md:flex items-center justify-between">
         <Link className="text-primary font-semibold text-4xl" href={"/"}>
           YumYard

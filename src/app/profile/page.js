@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/layout/Spinner";
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
 import { useGetUserInfo, useUpdateUserInfo } from "@/libs/Tanstack/queries";
@@ -28,7 +29,11 @@ export default function ProfilePage() {
   }
 
   if (status === "loading" || userDataLoading) {
-    return "Loading...";
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (status === "unauthenticated") {

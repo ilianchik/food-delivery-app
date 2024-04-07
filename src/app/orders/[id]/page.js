@@ -2,6 +2,7 @@
 import { CartContext, cartProductPrice } from "@/components/AppContext";
 import AddressInputs from "@/components/layout/AddressInputs";
 import SectionHeaders from "@/components/layout/SectionHeaders";
+import Spinner from "@/components/layout/Spinner";
 import CartProduct from "@/components/menu/CartProduct";
 import { useGetOrderById } from "@/libs/Tanstack/queries";
 import { useParams } from "next/navigation";
@@ -25,7 +26,12 @@ export default function OrderPage() {
       subtotal += cartProductPrice(product);
     }
   }
-
+  if (loadingOrder)
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   return (
     <section className="max-w-2xl mx-auto mt-8">
       <div className="text-center">
@@ -35,7 +41,7 @@ export default function OrderPage() {
           <p>We will call you when your order will be on the way.</p>
         </div>
       </div>
-      {loadingOrder && <div>Loading order...</div>}
+
       {order && (
         <div className="grid md:grid-cols-2 md:gap-16">
           <div>

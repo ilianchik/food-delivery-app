@@ -9,21 +9,22 @@ export default function MenuItemTile({ onAddToCart, ...item }) {
   return (
     <div
       className="bg-gray-200 rounded-2xl text-center
-      group hover:bg-white hover:shadow-md hover:shadow-black/25 transition-all flex flex-col"
+      group hover:bg-white hover:shadow-md hover:shadow-black/25 transition-all grid z-0 w-[300px] md:w-full mx-auto"
     >
-      <div className="text-center">
+      <div className="text-center h-[200px] relative">
         <Image
           src={image}
-          className="w-full block mx-auto rounded-t-2xl"
+          className="w-full block h-full rounded-t-2xl"
           alt="pizza"
-          objectFit="contain"
-          width={500}
-          height={500}
+          layout="fill"
+          objectFit="cover"
         />
       </div>
-      <div className="p-4 flex flex-col h-[100%] justify-between">
-        <h4 className="font-semibold text-xl my-3">{name}</h4>
-        <p className="text-gray-500 text-sm line-clamp-3">{description}</p>
+      <div className="md:p-4 p-2 flex flex-col h-[100%] justify-between">
+        <h4 className="font-semibold text-lg md:text-xl my-3">{name}</h4>
+        <p className="text-gray-500 text-xs md:text-sm line-clamp-3">
+          {description}
+        </p>
         <AddToCartButton
           image={image}
           hasSizesOrExtras={hasSizesOrExtras}

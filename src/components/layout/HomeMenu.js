@@ -21,11 +21,11 @@ export default function HomeMenu() {
           mainHeader={"Our Best Sellers"}
         />
       </div>
-      <div className="grid sm:grid-cols-4 gap-5">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-5">
         {bestSellers?.length > 0 &&
           bestSellers.map((item) => <MenuItem key={item._id} {...item} />)}
       </div>
-      <div className="flex justify-center mt-10 font-semibold text-primary text-xl mb-[50px]">
+      <div className="flex justify-center mt-10 font-semibold text-primary md:text-xl mb-[50px]">
         <Link
           className="border border-primary rounded-full px-6 py-2 flex items-center"
           href={"/menu"}

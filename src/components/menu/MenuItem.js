@@ -1,5 +1,6 @@
 import { CartContext } from "@/components/AppContext";
 import MenuItemTile from "@/components/menu/MenuItemTile";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import FlyingButton from "react-flying-item";
@@ -13,12 +14,12 @@ export default function MenuItem(menuItem) {
   const { addToCart } = useContext(CartContext);
 
   async function handleAddToCartButtonClick() {
-    console.log("add to cart");
     const hasOptions = sizes.length > 0 || extraIngredientPrices.length > 0;
     if (hasOptions && !showPopup) {
       setShowPopup(true);
       return;
     }
+
     addToCart(menuItem, selectedSize, selectedExtras);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log("hiding popup");
@@ -50,7 +51,7 @@ export default function MenuItem(menuItem) {
       {showPopup && (
         <div
           onClick={() => setShowPopup(false)}
-          className="fixed inset-0 bg-black/80 flex items-center justify-center"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-10 px-10 md:px-0"
         >
           <div
             onClick={(ev) => ev.stopPropagation()}
@@ -116,7 +117,7 @@ export default function MenuItem(menuItem) {
                 onClick={handleAddToCartButtonClick}
               >
                 <FlyingButton targetTop={"5%"} targetLeft={"95%"} src={image}>
-                  <span className="text-primary w-full">
+                  <span className="text-primary w-full ">
                     Add to cart ${selectedPrice}
                   </span>
                 </FlyingButton>
