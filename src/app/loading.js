@@ -1,3 +1,4 @@
+"use client";
 function loading() {
   return (
     <div className="w-full h-full fixed top-0 left-0 bg-white opacity-100 z-50">
