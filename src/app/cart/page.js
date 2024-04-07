@@ -96,7 +96,7 @@ export default function CartPage() {
               Total:
             </div>
             <div className="font-semibold pl-2 text-right">
-              ${subtotal}
+              ${subtotal.toFixed(2)}
               <br />
               $5
               <br />${(subtotal + 5).toFixed(2)}
