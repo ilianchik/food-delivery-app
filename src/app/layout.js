@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
             <AppProvider>
               <Toaster />
               <Header />
-              <div className="">{children}</div>
+              <div className="max-w-7xl">{children}</div>
               <footer className="border-t p-8 text-sm md:text-base text-center text-gray-500 mt-8 md:mt-16">
                 &copy; 2024 All rights reserved
               </footer>

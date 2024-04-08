@@ -51,7 +51,7 @@ export default function OrderPage() {
             <div className="text-right py-2 text-gray-500">
               Subtotal:
               <span className="text-black font-bold inline-block w-8">
-                ${subtotal}
+                ${subtotal.toFixed(2)}
               </span>
               <br />
               Delivery:
@@ -59,7 +59,7 @@ export default function OrderPage() {
               <br />
               Total:
               <span className="text-black font-bold inline-block w-8">
-                ${subtotal + 5}
+                ${(subtotal + 5).toFixed(2)}
               </span>
             </div>
           </div>

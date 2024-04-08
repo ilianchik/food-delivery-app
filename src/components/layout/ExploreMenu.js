@@ -21,7 +21,7 @@ function ExploreMenu() {
         cravings and elevate your dining experience, one delicious meal at a
         time.
       </p>
-      <div className="md:flex md:gap-6 md:justify-between mb-[50px]  md:flex-nowrap grid grid-cols-3 items-center">
+      <div className="md:flex md:gap-6 md:justify-between mb-[50px]  md:flex-nowrap grid grid-cols-3  items-center">
         {categories.slice(0, 7)?.map((category) => {
           const filteredMenuItems = menuItems.filter(
             (menuItem) => menuItem.category === category._id
@@ -37,7 +37,7 @@ function ExploreMenu() {
               key={category._id}
             >
               <Image
-                className="rounded-full border w-[50%] md:w-auto"
+                className="rounded-full border w-[80%] sm:w-[50%] md:w-auto"
                 src={randomMenuItem?.image}
                 alt="img"
                 width={130}
