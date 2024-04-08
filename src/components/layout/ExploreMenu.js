@@ -42,6 +42,7 @@ function ExploreMenu() {
                 alt="img"
                 width={130}
                 height={130}
+                loading="lazy"
               />
               <p className="md:text-lg text-gray-500">{category.name}</p>
             </div>

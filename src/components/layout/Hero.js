@@ -4,8 +4,8 @@ export default function Hero() {
   return (
     <>
       <section className="hero  md:mt-8 mb-5 md:mb-10 h-[400px] md:h-[450px] rounded-3xl flex align-bottom">
-        <div className="py-8 md:py-12 flex flex-col justify-end ml-[7%] md:w-[50%] w-[80%]">
-          <h1 className="text-4xl md:text-6xl font-regular text-white md:leading-[80px] w-full">
+        <div className="py-8 md:py-12 flex flex-col justify-end ml-[7%] lg:w-[50%] w-[80%]">
+          <h1 className="text-4xl md:text-5xl xl:text-6xl font-regular text-white md:leading-[50px] xl:leading-[80px] w-full">
             Order your <br />
             favourite food here
           </h1>

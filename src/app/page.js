@@ -55,6 +55,7 @@ export default function Home() {
               width={700}
               height={700}
               alt="image"
+              loading="lazy"
             />
           </div>
         </div>

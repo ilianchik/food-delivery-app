@@ -9,6 +9,7 @@ import Link from "next/link";
 export default function OrdersPage() {
   const { data: profile, isPending: loading } = useGetUserInfo();
   const { data: orders, isPending: loadingOrders } = useGetOrders();
+  const reversedOrders = orders ? [...orders].reverse() : [];
 
   if (loading || loadingOrders)
     return (
@@ -22,7 +23,7 @@ export default function OrdersPage() {
       <UserTabs isAdmin={profile.admin} />
       <div className="mt-8">
         {orders?.length > 0 &&
-          orders.map((order) => (
+          reversedOrders.map((order) => (
             <div
               key={order._id}
               className="bg-gray-100 mb-2 p-4 rounded-lg flex flex-col md:flex-row items-center gap-6"

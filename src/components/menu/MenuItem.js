@@ -67,6 +67,7 @@ export default function MenuItem(menuItem) {
                 width={300}
                 height={200}
                 className="mx-auto"
+                loading="lazy"
               />
               <h2 className="text-lg font-bold text-center mb-2 mt-2">
                 {name}

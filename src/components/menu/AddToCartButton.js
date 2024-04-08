@@ -17,7 +17,7 @@ export default function AddToCartButton({
       return (
         <div className="flying-button-parent mt-4">
           <div className="w-full" onClick={() => router.push("/login")}>
-            <button className="text-xs md:text-base">
+            <button className="text-xs lg:text-sm xl:text-base">
               Add to cart ${basePrice}
             </button>
           </div>
@@ -25,7 +25,7 @@ export default function AddToCartButton({
       );
     }
     return (
-      <div className="flying-button-parent mt-4 text-xs md:text-base">
+      <div className="flying-button-parent mt-4 text-xs lg:text-sm xl:text-base">
         <div className="w-full" onClick={onClick}>
           <FlyingButton targetTop={"5%"} targetLeft={"95%"} src={image}>
             Add to cart ${basePrice}
@@ -40,7 +40,7 @@ export default function AddToCartButton({
       <button
         type="button"
         onClick={() => router.push("/login")}
-        className="mt-4 bg-primary text-white rounded-full md:px-8 py-2 text-xs md:text-base"
+        className="mt-4 bg-primary text-white rounded-full md:px-8 py-2 text-xs lg:text-sm xl:text-base"
       >
         <span>Add to cart (from ${basePrice})</span>
       </button>
@@ -50,7 +50,7 @@ export default function AddToCartButton({
     <button
       type="button"
       onClick={onClick}
-      className="mt-4 bg-primary text-white rounded-full md:px-8 py-2 text-xs md:text-base"
+      className="mt-4 bg-primary text-white rounded-full md:px-8 py-2 text-xs lg:text-sm xl:text-base"
     >
       <span>Add to cart (from ${basePrice})</span>
     </button>

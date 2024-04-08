@@ -72,7 +72,7 @@ export default function UserForm({ user, onSave }) {
               <input
                 id="adminCb"
                 type="checkbox"
-                className=""
+                className="accent-primary"
                 value={"1"}
                 checked={admin}
                 onChange={(ev) => setAdmin(ev.target.checked)}

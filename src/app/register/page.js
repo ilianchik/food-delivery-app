@@ -65,7 +65,13 @@ export default function RegisterPage() {
           className="flex gap-4 justify-center"
           type="button"
         >
-          <Image src={"/google.png"} alt={""} width={24} height={24} />
+          <Image
+            src={"/google.png"}
+            alt={""}
+            width={24}
+            height={24}
+            loading="lazy"
+          />
           Login with google
         </button>
         <div className="text-center my-4 text-gray-500 border-t pt-4">

@@ -18,6 +18,7 @@ export default function MenuItemTile({ onAddToCart, ...item }) {
           alt="pizza"
           layout="fill"
           objectFit="cover"
+          loading="lazy"
         />
       </div>
       <div className="md:p-4 p-2 flex flex-col h-[100%] justify-between">

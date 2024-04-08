@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 section.hero {
-  background-image: url("/hero-background.png");
+  background-image: url("/hero-background.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

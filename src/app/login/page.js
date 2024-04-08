@@ -72,7 +72,13 @@ export default function LoginPage() {
           onClick={() => loginWithGoogle()}
           className="flex gap-4 justify-center"
         >
-          <Image src={"/google.png"} alt={""} width={24} height={24} />
+          <Image
+            src={"/google.png"}
+            alt={""}
+            width={24}
+            height={24}
+            loading="lazy"
+          />
           Login with google
         </button>
       </form>

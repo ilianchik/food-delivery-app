@@ -31,6 +31,7 @@ export default function EditableImage({ link, setLink }) {
           width={250}
           height={250}
           alt={"avatar"}
+          loading="lazy"
         />
       )}
       {!link && (

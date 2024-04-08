@@ -73,13 +73,13 @@ export default function Header() {
       setMobileNavOpen(false);
     }
   };
-  useEffect(() => {
-    mobileNavOpen
-      ? document.body.classList.add("overflow-y-hidden")
-      : document.body.classList.remove("overflow-y-hidden");
-  }, [mobileNavOpen]);
+  // useEffect(() => {
+  //   mobileNavOpen
+  //     ? document.body.classList.add("overflow-y-hidden")
+  //     : document.body.classList.remove("overflow-y-hidden");
+  // }, [mobileNavOpen]);
   return (
-    <header>
+    <header className="">
       <div className="flex items-center md:hidden justify-between mb-3">
         <Link className="text-primary font-semibold text-2xl" href={"/"}>
           YumYard
@@ -106,18 +106,21 @@ export default function Header() {
 
       <div
         onClick={handleMenuClick}
-        className={`md:hidden   grid grid-cols-[0.4fr_0.6fr] text-center h-[100lvh] w-[100vw] top-0 right-0 absolute justify-start  transition-all z-10 ${
+        className={`md:hidden   grid grid-cols-[0.4fr_0.6fr] text-center h-[100lvh] w-[100vw] top-0 right-0 fixed justify-start  transition-all z-10 ${
           mobileNavOpen
-            ? "translate-x-0 opacity-1"
-            : "translate-x-[100%] opacity-0"
+            ? "translate-x-0 opacity-1 visible"
+            : "translate-x-[100%] opacity-0 invisible"
         } `}
       >
-        <div></div>
-        <div className="flex flex-col gap-10 text-center pt-[30%] p-4 bg-gray-200 rounded-lg  relative">
+        <div
+          onClick={handleMenuClick}
+          className="backdrop-blur-sm bg-white/60 element"
+        ></div>
+        <div className="flex flex-col gap-10 text-center pt-[50%] p-4 bg-gray-200 rounded-lg items-center  relative">
           <Cross className="w-6 h-6 absolute top-2 left-2 element" />
           {status === "authenticated" ? (
             <Link className="whitespace-nowrap element" href={"/profile"}>
-              Profile, {userName}
+              Profile
             </Link>
           ) : null}
           <Link className="element" href={"/"}>
