@@ -106,7 +106,7 @@ export default function Header() {
 
       <div
         onClick={handleMenuClick}
-        className={`md:hidden   grid grid-cols-[0.4fr_0.6fr] text-center h-[100lvh] w-[100vw] top-0 right-0 fixed justify-start  transition-all z-10 ${
+        className={`md:hidden   grid grid-cols-[0.4fr_0.6fr] text-center h-[100dvh] w-[100vw] top-0 right-0 fixed justify-start  transition-all z-10 ${
           mobileNavOpen
             ? "translate-x-0 opacity-1 visible"
             : "translate-x-[100%] opacity-0 invisible"

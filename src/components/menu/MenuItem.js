@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import FlyingButton from "react-flying-item";
+import toast from "react-hot-toast";
 
 export default function MenuItem(menuItem) {
   const { image, name, description, basePrice, sizes, extraIngredientPrices } =
@@ -22,7 +23,7 @@ export default function MenuItem(menuItem) {
 
     addToCart(menuItem, selectedSize, selectedExtras);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("hiding popup");
+    toast.success("Added to cart!");
     setShowPopup(false);
   }
   function handleExtraThingClick(ev, extraThing) {
