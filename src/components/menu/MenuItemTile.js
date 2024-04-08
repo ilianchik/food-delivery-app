@@ -9,7 +9,7 @@ export default function MenuItemTile({ onAddToCart, ...item }) {
   return (
     <div
       className="bg-gray-200 rounded-2xl text-center
-      group hover:bg-white hover:shadow-md hover:shadow-black/25 transition-all grid z-0 w-[300px] md:w-full mx-auto"
+      group lg:hover:bg-white lg:hover:shadow-md lg:hover:shadow-black/25 transition-all grid !z-0 w-[300px] md:w-full mx-auto"
     >
       <div className="text-center h-[200px] relative">
         <Image

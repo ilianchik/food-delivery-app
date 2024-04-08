@@ -68,7 +68,9 @@ export default function MenuItem(menuItem) {
                 height={200}
                 className="mx-auto"
               />
-              <h2 className="text-lg font-bold text-center mb-2">{name}</h2>
+              <h2 className="text-lg font-bold text-center mb-2 mt-2">
+                {name}
+              </h2>
               <p className="text-center text-gray-500 text-sm mb-2">
                 {description}
               </p>
@@ -81,6 +83,7 @@ export default function MenuItem(menuItem) {
                       className="flex items-center gap-2 p-4 border rounded-md mb-1"
                     >
                       <input
+                        className="accent-primary"
                         type="radio"
                         onChange={() => setSelectedSize(size)}
                         checked={selectedSize?.name === size.name}
@@ -93,13 +96,14 @@ export default function MenuItem(menuItem) {
               )}
               {extraIngredientPrices?.length > 0 && (
                 <div className="py-2">
-                  <h3 className="text-center text-gray-700">Any extras?</h3>
+                  <h3 className="text-center text-gray-700 ">Any extras?</h3>
                   {extraIngredientPrices.map((extraThing) => (
                     <label
                       key={extraThing._id}
                       className="flex items-center gap-2 p-4 border rounded-md mb-1"
                     >
                       <input
+                        className="accent-primary"
                         type="checkbox"
                         onChange={(ev) => handleExtraThingClick(ev, extraThing)}
                         checked={selectedExtras
@@ -117,12 +121,15 @@ export default function MenuItem(menuItem) {
                 onClick={handleAddToCartButtonClick}
               >
                 <FlyingButton targetTop={"5%"} targetLeft={"95%"} src={image}>
-                  <span className="text-primary w-full ">
+                  <span className="text-primary w-full text-sm md:text-base">
                     Add to cart ${selectedPrice}
                   </span>
                 </FlyingButton>
               </div>
-              <button className="mt-2" onClick={() => setShowPopup(false)}>
+              <button
+                className="mt-2  text-sm md:text-base"
+                onClick={() => setShowPopup(false)}
+              >
                 Cancel
               </button>
             </div>

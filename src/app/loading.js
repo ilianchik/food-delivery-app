@@ -1,6 +1,6 @@
 function loading() {
   return (
-    <div className="w-full h-full fixed top-0 left-0 bg-white opacity-100 z-50">
+    <div className="w-[100vw] h-full fixed top-0 left-0 bg-white opacity-100 z-50">
       <div className="flex flex-col items-center justify-center h-screen gap-5">
         <h2 className="text-primary font-semibold text-4xl" href={"/"}>
           YumYard

@@ -1,12 +1,13 @@
 "use client";
 import { CartContext } from "@/components/AppContext";
 import Bars2 from "@/components/icons/Bars2";
+import Cross from "@/components/icons/Cross";
 import ShoppingCart from "@/components/icons/ShoppingCart";
 import { useGetUserInfo } from "@/libs/Tanstack/queries";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "./Loader";
 
 function AuthLinks({ status, userName }) {
@@ -14,7 +15,7 @@ function AuthLinks({ status, userName }) {
   if (status === "authenticated") {
     return (
       <>
-        <Link href={"/profile"} className="whitespace-nowrap">
+        <Link href={"/profile"} className="whitespace-nowrap hidden md:block">
           Hello, {userName}
         </Link>
         <button
@@ -22,7 +23,7 @@ function AuthLinks({ status, userName }) {
             signOut();
             clearCart();
           }}
-          className="border-primary text-primary rounded-full  px-8 py-2"
+          className="border-primary text-primary rounded-full  px-8 py-2 hidden md:block"
         >
           Logout
         </button>
@@ -32,10 +33,12 @@ function AuthLinks({ status, userName }) {
   if (status === "unauthenticated") {
     return (
       <>
-        <Link href={"/login"}>Login</Link>
+        <Link className="hidden md:block" href={"/login"}>
+          Login
+        </Link>
         <Link
           href={"/register"}
-          className="border-primary border text-primary  rounded-full  px-8 py-2"
+          className="border-primary border text-primary  rounded-full  px-8 py-2 hidden md:block"
         >
           Register
         </Link>
@@ -48,6 +51,7 @@ function AuthLinks({ status, userName }) {
 }
 
 export default function Header() {
+  const { clearCart } = useContext(CartContext);
   const session = useSession();
   const status = session?.status;
   const { data: userData } = useGetUserInfo();
@@ -60,6 +64,20 @@ export default function Header() {
   if (userName && userName.includes(" ")) {
     userName = userName.split(" ")[0];
   }
+  const handleMenuClick = (event) => {
+    const target = event.target;
+
+    // Перевірка, чи клікнуто на елемент меню
+    if (target.classList.contains("element")) {
+      // Закриття мобільного меню
+      setMobileNavOpen(false);
+    }
+  };
+  useEffect(() => {
+    mobileNavOpen
+      ? document.body.classList.add("overflow-y-hidden")
+      : document.body.classList.remove("overflow-y-hidden");
+  }, [mobileNavOpen]);
   return (
     <header>
       <div className="flex items-center md:hidden justify-between mb-3">
@@ -77,24 +95,74 @@ export default function Header() {
           </Link>
           <button
             className="p-1 border"
-            onClick={() => setMobileNavOpen((prev) => !prev)}
+            onClick={() => {
+              setMobileNavOpen((prev) => !prev);
+            }}
           >
             <Bars2 />
           </button>
         </div>
       </div>
-      {mobileNavOpen && (
-        <div
-          onClick={() => setMobileNavOpen(false)}
-          className="md:hidden p-4 bg-gray-200 rounded-lg mt-2 flex flex-col gap-2 text-center"
-        >
-          <Link href={"/"}>Home</Link>
-          <Link href={"/menu"}>Menu</Link>
-          <Link href={"/#about"}>About</Link>
-          <Link href={"/#contact"}>Contact</Link>
-          <AuthLinks status={status} userName={userName} />
+
+      <div
+        onClick={handleMenuClick}
+        className={`md:hidden   grid grid-cols-[0.4fr_0.6fr] text-center h-[100lvh] w-[100vw] top-0 right-0 absolute justify-start  transition-all z-10 ${
+          mobileNavOpen
+            ? "translate-x-0 opacity-1"
+            : "translate-x-[100%] opacity-0"
+        } `}
+      >
+        <div></div>
+        <div className="flex flex-col gap-10 text-center pt-[30%] p-4 bg-gray-200 rounded-lg  relative">
+          <Cross className="w-6 h-6 absolute top-2 left-2 element" />
+          {status === "authenticated" ? (
+            <Link className="whitespace-nowrap element" href={"/profile"}>
+              Profile, {userName}
+            </Link>
+          ) : null}
+          <Link className="element" href={"/"}>
+            Home
+          </Link>
+          <Link className="element" href={"/menu"}>
+            Menu
+          </Link>
+          <Link className="element" href={"/#about"}>
+            About
+          </Link>
+          <Link className="element" href={"/#contact"}>
+            Contact
+          </Link>
+          <div className="flex gap-5 justify-center absolute bottom-5 left-[50%] translate-x-[-50%]">
+            {status === "authenticated" ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  clearCart();
+                }}
+                className="border-primary text-primary rounded-full w-fit  px-6 py-2 element"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link
+                  className="border border-primary text-primary rounded-full w-fit  px-6 py-2 element"
+                  href={"/login"}
+                >
+                  Login
+                </Link>
+                <Link
+                  className="border border-primary text-primary rounded-full w-fit px-6 py-2 element"
+                  href={"/register"}
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
         </div>
-      )}
+      </div>
+
       <div className="hidden md:flex items-center justify-between">
         <Link className="text-primary font-semibold text-4xl" href={"/"}>
           YumYard
