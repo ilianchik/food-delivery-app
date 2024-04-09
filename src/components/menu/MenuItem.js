@@ -22,8 +22,9 @@ export default function MenuItem(menuItem) {
     }
 
     addToCart(menuItem, selectedSize, selectedExtras);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     toast.success("Added to cart!");
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     setShowPopup(false);
   }
   function handleExtraThingClick(ev, extraThing) {
