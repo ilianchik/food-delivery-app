@@ -8,7 +8,7 @@ import TanstackProvider from "@/components/TanstackProvider";
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata = {
-  title: "YumYard",
+  title: "YumYard - Food ordering",
   description: "Order food with YumYard!",
 };
 
